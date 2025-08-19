@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+
 public class Greeter {
     static String botName = "Penny";
 
@@ -9,9 +12,26 @@ public class Greeter {
         System.out.println("Bye. Hope to see you again soon!\n");
     }
 
-    public static void main(String[] args) {
+    public void startConversation() {
+        Scanner scanner = new Scanner(System.in);
+
         Greeter greeter = new Greeter();
         greeter.sayHi();
-        greeter.sayBye();
+
+        while(true) {
+            String userInput = scanner.nextLine();
+
+            if (userInput.equalsIgnoreCase("bye")) {
+                greeter.sayBye();
+                break;
+            }
+
+            System.out.println(userInput);
+        }
+    }
+
+    public static void main(String[] args) {
+        Greeter greeter = new Greeter();
+        greeter.startConversation();
     }
 }
