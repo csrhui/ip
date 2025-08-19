@@ -15,15 +15,15 @@ public class Greeter {
     }
 
     private void listUserTasks() {
-        int taskCount = userTasks.size();
+        int taskCount = this.userTasks.size();
         if (taskCount == 0) {
             System.out.println("You have no tasks.");
         } else {
             StringBuilder taskList = new StringBuilder("Your tasks:\n");
             for (int i = 0; i < taskCount; i++) {
-                taskList.append(i + 1).append(". ").append(userTasks.get(i)).append("\n");
+                taskList.append(i + 1).append(". ").append(this.userTasks.get(i)).append("\n");
             }
-            System.out.println(taskList.toString());
+            System.out.println(taskList);
         }
     }
 
