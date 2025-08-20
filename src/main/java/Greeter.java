@@ -39,7 +39,7 @@ public class Greeter {
         }
         Task task = userTasks.get(taskIndex);
         task.markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
+        System.out.println("Nice! I've marked this task as done:\n" + task);
     }
 
     private static int isMarkPattern(String input) {
@@ -49,6 +49,28 @@ public class Greeter {
                 If not, it returns -1.
         */
         if (input.matches("(?i)mark \\d+")) {
+            String number = input.split(" ")[1];
+            return Integer.parseInt(number);
+        }
+        return -1;
+    }
+
+    private void unmarkUserTask(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= userTasks.size()) {
+            System.out.println("Invalid task number.");
+            return;
+        }
+        this.userTasks.get(taskIndex).unmarkAsDone();
+        System.out.println("OK, I've marked this task as not done yet:\n" + this.userTasks.get(taskIndex));
+    }
+
+    private static int isUnmarkPattern(String input) {
+        /*
+                This method checks if the input matches the pattern "mark <number>".
+                If it does, it returns the task number as an integer.
+                If not, it returns -1.
+        */
+        if (input.matches("(?i)unmark \\d+")) {
             String number = input.split(" ")[1];
             return Integer.parseInt(number);
         }
@@ -76,6 +98,12 @@ public class Greeter {
             if (isMarkPattern(userInput) > 0) {
                 int taskIndex = isMarkPattern(userInput) - 1;
                 this.markUserTask(taskIndex);
+                continue;
+            }
+
+            if (isUnmarkPattern(userInput) > 0) {
+                int taskIndex = isUnmarkPattern(userInput) - 1;
+                this.unmarkUserTask(taskIndex);
                 continue;
             }
 
