@@ -15,12 +15,14 @@ public class Task {
         return this.description;
     }
 
-    public void markAsDone() {
+    public Task markAsDone() {
         this.isDone = true;
+        return this;
     }
 
-    public void unmarkAsDone() {
+    public Task unmarkAsDone() {
         this.isDone = false;
+        return this;
     }
 
     @Override
