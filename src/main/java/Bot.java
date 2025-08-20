@@ -1,10 +1,11 @@
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 
 public class Greeter {
     static String botName = "Penny";
-    ArrayList<Task> userTasks = new ArrayList<>();
+    List<Task> userTasks = new ArrayList<>();
 
     public void sayHi() {
         System.out.println("Hi! I'm " + Greeter.botName + ".\nWhat can I do for you?\n");
