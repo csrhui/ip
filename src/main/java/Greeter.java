@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Greeter {
     static String botName = "Penny";
-    ArrayList<String> userTasks = new ArrayList<>();
+    ArrayList<Task> userTasks = new ArrayList<>();
 
     public void sayHi() {
         System.out.println("Hi! I'm " + Greeter.botName + ".\nWhat can I do for you?\n");
@@ -27,31 +27,59 @@ public class Greeter {
         }
     }
 
-    private void addUserTask(String task) {
+    private void addUserTask(Task task) {
         userTasks.add(task);
-        System.out.println("Added: " + task);
+        System.out.println("Added: " + task.getDescription());
+    }
+
+    private void markUserTask(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= userTasks.size()) {
+            System.out.println("Invalid task number.");
+            return;
+        }
+        Task task = userTasks.get(taskIndex);
+        task.markAsDone();
+        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
+    }
+
+    private static int isMarkPattern(String input) {
+        /*
+                This method checks if the input matches the pattern "mark <number>".
+                If it does, it returns the task number as an integer.
+                If not, it returns -1.
+        */
+        if (input.matches("(?i)mark \\d+")) {
+            String number = input.split(" ")[1];
+            return Integer.parseInt(number);
+        }
+        return -1;
     }
 
     public void startConversation() {
         Scanner scanner = new Scanner(System.in);
 
-        Greeter greeter = new Greeter();
-        greeter.sayHi();
+        this.sayHi();
 
         while(true) {
             String userInput = scanner.nextLine();
 
             if (userInput.equalsIgnoreCase("bye")) {
-                greeter.sayBye();
+                this.sayBye();
                 break;
             }
 
             if (userInput.equalsIgnoreCase("list")) {
-                greeter.listUserTasks();
+                this.listUserTasks();
                 continue;
             }
 
-            greeter.addUserTask(userInput);
+            if (isMarkPattern(userInput) > 0) {
+                int taskIndex = isMarkPattern(userInput) - 1;
+                this.markUserTask(taskIndex);
+                continue;
+            }
+
+            this.addUserTask(new Task(userInput));
         }
     }
 
