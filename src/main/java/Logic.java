@@ -1,5 +1,8 @@
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.lang.StringBuilder;
+import java.util.LinkedHashMap;
 
 public class Logic {
     public static TaskManager taskManager;
@@ -37,7 +40,7 @@ public class Logic {
 
         switch (command.getCommandType()) {
             case BYE:
-                String messageBye = "Bye. Hope to see you again soon!\n";
+                String messageBye = "Bye. Hope to see you again soon!";
                 return new Response(messageBye, true);
 
             case LIST:
@@ -105,12 +108,8 @@ public class Logic {
                 return new Response(messageEvent, false);
 
             default:
-                StringBuilder messageDefault = new StringBuilder(
-                        "I'm sorry, but I don't understand that command. Please use one of the following commands:\n");
-                COMMAND_FORMATS.forEach((commandType, commandFormat) -> {
-                    messageDefault.append(commandFormat + "\n");
-                });
-                return new Response(messageDefault.toString(),false);
+                String messageDefault = "I'm sorry, but I don't understand that command.";
+                return new Response(messageDefault,false);
         }
     }
 }

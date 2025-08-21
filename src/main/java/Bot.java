@@ -18,7 +18,7 @@ public class Bot {
             String userInput = scanner.nextLine();
 
             Response response = logic.botResponse(userInput);
-            System.out.println(response.getResponseMessage());
+            System.out.println(response.getResponseMessage() + "\n");
 
             if (response.shouldExit()) {
                 break;

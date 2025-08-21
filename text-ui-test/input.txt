@@ -1,0 +1,10 @@
+todo eat lunch
+deadline submit homework /by tomorrow
+event gardening /from 10am /to noon
+list
+mark 2
+list
+unmark 2
+list
+foobar
+bye
