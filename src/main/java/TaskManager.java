@@ -13,6 +13,13 @@ public class TaskManager {
         this.taskList.addTask(task);
     }
 
+    public Task deleteUserTask(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
+            throw new IndexOutOfBoundsException("Task index out of bounds.");
+        }
+        return taskList.deleteTask(taskIndex);
+    }
+
     public Task markTaskAsDone(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new IndexOutOfBoundsException("Task index out of bounds.");

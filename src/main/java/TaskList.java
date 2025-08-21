@@ -27,6 +27,14 @@ public class TaskList {
         this.taskCount++;
     }
 
+    public Task deleteTask(int index) {
+        if (index < 0 || index >= this.taskCount) {
+            throw new IndexOutOfBoundsException("Task index out of bounds.");
+        }
+        this.taskCount--;
+        return this.taskStore.remove(index);
+    }
+
     public String toString() {
         if (this.taskCount == 0) {
             return "You have no tasks.";

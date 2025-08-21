@@ -8,6 +8,8 @@ public class InputParser {
             Pattern.compile("^\\s*mark\\s+(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern UNMARK_PATTERN =
             Pattern.compile("^\\s*unmark\\s+(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern DELETE_PATTERN =
+            Pattern.compile("^\\s*delete\\s+(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern TODO_PATTERN =
             Pattern.compile("^\\s*todo\\s+(.+)\\s*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern DEADLINE_PATTERN =
@@ -19,6 +21,8 @@ public class InputParser {
             Pattern.compile("^\\s*mark\\s*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern INCOMPLETE_UNMARK_PATTERN =
             Pattern.compile("^\\s*unmark\\s*$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern INCOMPLETE_DELETE_PATTERN =
+            Pattern.compile("^\\s*delete\\s*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern INCOMPLETE_TODO_PATTERN =
             Pattern.compile("^\\s*todo\\s*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern INCOMPLETE_DEADLINE_PATTERN =
@@ -51,7 +55,7 @@ public class InputParser {
             throw new PennyException("Please specify a task number to mark. Usage: mark <task number>");
         }
 
-        // Check for invalid mark command (non-integer)
+//        // Check for invalid mark command (non-integer)
         Matcher invalidMarkMatcher = INVALID_MARK_PATTERN.matcher(trimmedInput);
         if (invalidMarkMatcher.matches()) {
             try {
@@ -65,11 +69,7 @@ public class InputParser {
         Matcher markMatcher = MARK_PATTERN.matcher(trimmedInput);
         if (markMatcher.matches()) {
             String taskNumber = markMatcher.group(1);
-            try {
-                Integer.parseInt(taskNumber);
-            } catch (NumberFormatException e) {
-                throw new PennyException("Task number must be an integer. Usage: mark <task number>");
-            }
+            Integer.parseInt(taskNumber);
             return new Command(Logic.CommandType.MARK,
                     Map.of("taskNumber", markMatcher.group(1)));
         }
@@ -93,13 +93,33 @@ public class InputParser {
         Matcher unmarkMatcher = UNMARK_PATTERN.matcher(trimmedInput);
         if (unmarkMatcher.matches()) {
             String taskNumber = unmarkMatcher.group(1);
-            try {
-                Integer.parseInt(taskNumber);
-            } catch (NumberFormatException e) {
-                throw new PennyException("Task number must be an integer. Usage: unmark <task number>");
-            }
-            return new Command(Logic.CommandType.UNMARK,  // Fixed: was MARK, should be UNMARK
+            Integer.parseInt(taskNumber);
+            return new Command(Logic.CommandType.UNMARK,
                     Map.of("taskNumber", unmarkMatcher.group(1)));
+        }
+
+        // Check for incomplete delete command
+        if (INCOMPLETE_DELETE_PATTERN.matcher(trimmedInput).matches()) {
+            throw new PennyException("Please specify a task number to delete. Usage: delete <task number>");
+        }
+
+        // Check for invalid unmark command (non-integer)
+        Matcher deleteMatcher = DELETE_PATTERN.matcher(trimmedInput);
+        if (deleteMatcher.matches()) {
+            try {
+                Integer.parseInt(deleteMatcher.group(1));
+            } catch (NumberFormatException e) {
+                throw new PennyException("Task number must be an integer. Usage: delete <task number>");
+            }
+        }
+
+        // Check for valid delete command
+        Matcher deleteMatcherValid = DELETE_PATTERN.matcher(trimmedInput);
+        if (deleteMatcherValid.matches()) {
+            String taskNumber = deleteMatcherValid.group(1);
+            Integer.parseInt(taskNumber);
+            return new Command(Logic.CommandType.DELETE,
+                    Map.of("taskNumber", deleteMatcherValid.group(1)));
         }
 
         // Check for incomplete usertodo command

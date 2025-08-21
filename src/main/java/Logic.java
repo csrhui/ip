@@ -8,7 +8,7 @@ public class Logic {
     public static TaskManager taskManager;
     public String botName;
     public enum CommandType {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, UNKNOWN
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, UNKNOWN
     }
     public static final Map<CommandType, String> COMMAND_FORMATS = new LinkedHashMap<>() {{
         put(CommandType.TODO, "todo <description>");
@@ -81,6 +81,13 @@ public class Logic {
                 Task task_unmark = taskManager.unmarkTaskAsDone(taskIndex_unmark);
                 String messageUnmark = "OK, I've marked this task as not done yet:\n" + task_unmark;
                 return new Response(messageUnmark, false);
+
+            case DELETE:
+                int taskIndex_delete = Integer.parseInt(command.getArguments().get("taskNumber")) - 1;
+                Task task_delete = taskManager.deleteUserTask(taskIndex_delete);
+                String messageDelete = "Noted, I've removed this task:\n" + task_delete + "\n"
+                        + taskManager.taskList.toString();
+                return new Response(messageDelete, false);
 
             case TODO:
                 String description_todo = command.getArguments().get("description");
