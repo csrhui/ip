@@ -16,13 +16,20 @@ public class Bot {
 
         while(true) {
             String userInput = scanner.nextLine();
-
             Response response = logic.botResponse(userInput);
             System.out.println(response.getResponseMessage() + "\n");
-
             if (response.shouldExit()) {
                 break;
             }
+//            try {
+//                Response response = logic.botResponse(userInput);
+//                System.out.println(response.getResponseMessage() + "\n");
+//                if (response.shouldExit()) {
+//                    break;
+//                }
+//            } catch (PennyException e) {
+//                System.out.println("Error: " + e.getMessage() + "\n");
+//            }
         }
     }
 

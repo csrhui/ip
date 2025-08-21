@@ -10,19 +10,37 @@ public class Logic {
     public enum CommandType {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, UNKNOWN
     }
-    private static final Map<CommandType, String> COMMAND_FORMATS = Map.of(
-            CommandType.TODO, "todo <description>",
-            CommandType.DEADLINE, "deadline <description> /by <date>",
-            CommandType.EVENT, "event <description> /from <start time> /to <end time>",
-            CommandType.MARK, "mark <task number>",
-            CommandType.UNMARK, "unmark <task number>",
-            CommandType.LIST, "list",
-            CommandType.BYE, "bye"
-    );
+    public static final Map<CommandType, String> COMMAND_FORMATS = new LinkedHashMap<>() {{
+        put(CommandType.TODO, "todo <description>");
+        put(CommandType.DEADLINE, "deadline <description> /by <date>");
+        put(CommandType.EVENT, "event <description> /from <start time> /to <end time>");
+        put(CommandType.LIST, "list");
+        put(CommandType.MARK, "mark <task number>");
+        put(CommandType.UNMARK, "unmark <task number>");
+        put(CommandType.BYE, "bye");
+    }};
+
 
     public Logic(String botName) {
         taskManager = new TaskManager();
         this.botName = botName;
+    }
+
+    public static String createCommandList() {
+        StringBuilder sb = new StringBuilder();
+        int commandNumber = 1;
+
+        for (String format : COMMAND_FORMATS.values()) {
+            sb.append(commandNumber++)
+                    .append(". ")
+                    .append(format);
+
+            if (commandNumber <= COMMAND_FORMATS.size()) {
+                sb.append("\n");
+            }
+        }
+
+        return sb.toString();
     }
 
     public String onStart() {
@@ -30,13 +48,18 @@ public class Logic {
     }
 
     public Response botResponse(String userInput) {
-        if (userInput == null || userInput.equals("")) {
+        if (userInput == null || userInput.isEmpty()) {
             String messageEmpty = "Please enter a valid command.";
             return new Response(messageEmpty, false);
         }
 
         InputParser parser = new InputParser();
-        InputParser.Command command = parser.parseInput(userInput);
+        InputParser.Command command = null;
+        try {
+            command = InputParser.parseInput(userInput);
+        } catch (PennyException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         switch (command.getCommandType()) {
             case BYE:
