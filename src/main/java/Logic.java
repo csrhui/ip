@@ -62,84 +62,84 @@ public class Logic {
         }
 
         switch (command.getCommandType()) {
-            case BYE:
-                String messageBye = "Bye. Hope to see you again soon!";
-                return new Response(messageBye, true);
+        case BYE:
+            String messageBye = "Bye. Hope to see you again soon!";
+            return new Response(messageBye, true);
 
-            case LIST:
-                String messageList = taskManager.listTasks();
-                return new Response(messageList, false);
+        case LIST:
+            String messageList = taskManager.listTasks();
+            return new Response(messageList, false);
 
-            case MARK:
-                int taskIndex_mark = Integer.parseInt(command.getArguments().get("taskNumber")) - 1;
-                Task task_mark = taskManager.markTaskAsDone(taskIndex_mark);
-                String messageMark = "Nice! I've marked this task as done:\n" + task_mark;
-                return new Response(messageMark, false);
+        case MARK:
+            int taskIndex_mark = Integer.parseInt(command.getArguments().get("taskNumber")) - 1;
+            Task task_mark = taskManager.markTaskAsDone(taskIndex_mark);
+            String messageMark = "Nice! I've marked this task as done:\n" + task_mark;
+            return new Response(messageMark, false);
 
-            case UNMARK:
-                int taskIndex_unmark = Integer.parseInt(command.getArguments().get("taskNumber")) - 1;
-                Task task_unmark = taskManager.unmarkTaskAsDone(taskIndex_unmark);
-                String messageUnmark = "OK, I've marked this task as not done yet:\n" + task_unmark;
-                return new Response(messageUnmark, false);
+        case UNMARK:
+            int taskIndex_unmark = Integer.parseInt(command.getArguments().get("taskNumber")) - 1;
+            Task task_unmark = taskManager.unmarkTaskAsDone(taskIndex_unmark);
+            String messageUnmark = "OK, I've marked this task as not done yet:\n" + task_unmark;
+            return new Response(messageUnmark, false);
 
-            case DELETE:
-                int taskIndex_delete = Integer.parseInt(command.getArguments().get("taskNumber")) - 1;
-                Task task_delete = taskManager.deleteUserTask(taskIndex_delete);
-                String messageDelete = "Noted, I've removed this task:\n" + task_delete + "\n"
-                        + taskManager.taskList.toString();
-                return new Response(messageDelete, false);
+        case DELETE:
+            int taskIndex_delete = Integer.parseInt(command.getArguments().get("taskNumber")) - 1;
+            Task task_delete = taskManager.deleteUserTask(taskIndex_delete);
+            String messageDelete = "Noted, I've removed this task:\n" + task_delete + "\n"
+                    + taskManager.taskList.toString();
+            return new Response(messageDelete, false);
 
-            case TODO:
-                String description_todo = command.getArguments().get("description");
-                if (description_todo == null || description_todo.isEmpty()) {
-                    String messageInvalidTodo = "The input format should be: todo <description>";
-                    return new Response(messageInvalidTodo, false);
-                }
-                Task task_todo = new ToDoTask(description_todo);
-                taskManager.addUserTask(task_todo);
-                String messageTodo = "Got it. I've added this task:\n"
-                        + task_todo + "\n"
-                        + taskManager.taskList.toString();
-                return new Response(messageTodo, false);
+        case TODO:
+            String description_todo = command.getArguments().get("description");
+            if (description_todo == null || description_todo.isEmpty()) {
+                String messageInvalidTodo = "The input format should be: todo <description>";
+                return new Response(messageInvalidTodo, false);
+            }
+            Task task_todo = new ToDoTask(description_todo);
+            taskManager.addUserTask(task_todo);
+            String messageTodo = "Got it. I've added this task:\n"
+                    + task_todo + "\n"
+                    + taskManager.taskList.toString();
+            return new Response(messageTodo, false);
 
-            case DEADLINE:
-                Map<String, String> deadlineArgs = command.getArguments();
-                String description_deadline = deadlineArgs.get("description");
-                String by = deadlineArgs.get("by");
-                if (description_deadline == null || description_deadline.isEmpty() ||
-                        by == null || by.isEmpty()) {
-                    String messageInvalidDeadline = "The input format should be: deadline <description> /by <date>";
-                    return new Response(messageInvalidDeadline, false);
-                }
-                Task task_deadline = new DeadlineTask(description_deadline, by);
-                taskManager.addUserTask(task_deadline);
-                String messageDeadline = "Got it. I've added this task:\n"
-                        + task_deadline + "\n"
-                        + taskManager.taskList.toString();
-                return new Response(messageDeadline, false);
+        case DEADLINE:
+            Map<String, String> deadlineArgs = command.getArguments();
+            String description_deadline = deadlineArgs.get("description");
+            String by = deadlineArgs.get("by");
+            if (description_deadline == null || description_deadline.isEmpty() ||
+                    by == null || by.isEmpty()) {
+                String messageInvalidDeadline = "The input format should be: deadline <description> /by <date>";
+                return new Response(messageInvalidDeadline, false);
+            }
+            Task task_deadline = new DeadlineTask(description_deadline, by);
+            taskManager.addUserTask(task_deadline);
+            String messageDeadline = "Got it. I've added this task:\n"
+                    + task_deadline + "\n"
+                    + taskManager.taskList.toString();
+            return new Response(messageDeadline, false);
 
-            case EVENT:
-                Map<String, String> eventArgs = command.getArguments();
-                String description_event = eventArgs.get("description");
-                String from = eventArgs.get("from");
-                String to = eventArgs.get("to");
-                if (description_event == null || description_event.isEmpty() ||
-                        from == null || from.isEmpty() ||
-                        to == null || to.isEmpty()) {
-                    String messageInvalidEvent =
-                            "The input format should be: event <description> /from <start time> /to <end time>";
-                    return new Response(messageInvalidEvent, false);
-                }
-                Task task_event = new EventTask(description_event, from, to);
-                taskManager.addUserTask(task_event);
-                String messageEvent = "Got it. I've added this task:\n"
-                        + task_event + "\n"
-                        + taskManager.taskList.toString();
-                return new Response(messageEvent, false);
+        case EVENT:
+            Map<String, String> eventArgs = command.getArguments();
+            String description_event = eventArgs.get("description");
+            String from = eventArgs.get("from");
+            String to = eventArgs.get("to");
+            if (description_event == null || description_event.isEmpty() ||
+                    from == null || from.isEmpty() ||
+                    to == null || to.isEmpty()) {
+                String messageInvalidEvent =
+                        "The input format should be: event <description> /from <start time> /to <end time>";
+                return new Response(messageInvalidEvent, false);
+            }
+            Task task_event = new EventTask(description_event, from, to);
+            taskManager.addUserTask(task_event);
+            String messageEvent = "Got it. I've added this task:\n"
+                    + task_event + "\n"
+                    + taskManager.taskList.toString();
+            return new Response(messageEvent, false);
 
-            default:
-                String messageDefault = "I'm sorry, but I don't understand that command.";
-                return new Response(messageDefault,false);
+        default:
+            String messageDefault = "I'm sorry, but I don't understand that command.";
+            return new Response(messageDefault,false);
         }
     }
 }
