@@ -12,6 +12,11 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to +")";
+        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+    }
+
+    @Override
+    public String toDataString() {
+        return String.format("E | %s | %s | %s", super.toDataString(), this.from, this.to);
     }
 }

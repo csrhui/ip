@@ -29,6 +29,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon()  + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String toDataString() {
+        return String.format("%d | %s", this.isDone ? 1 : 0, this.description);
     }
 }

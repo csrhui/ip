@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -27,5 +28,11 @@ public class Bot {
     public static void main(String[] args) {
         Bot bot = new Bot();
         bot.startConversation();
+        Storage storage = new Storage(bot.logic.taskManager.taskList);
+        try {
+            storage.saveTasks();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

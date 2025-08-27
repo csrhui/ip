@@ -9,4 +9,9 @@ public class ToDoTask extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toDataString() {
+        return String.format("T | %s", super.toDataString());
+    }
 }
