@@ -12,4 +12,9 @@ public class DeadlineTask extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String toDataString() {
+        return String.format("D | %s | %s", super.toDataString(), this.by);
+    }
 }
