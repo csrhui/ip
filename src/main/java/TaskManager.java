@@ -1,8 +1,6 @@
+import taskmodule.Task;
+
 public class TaskManager {
-    // add task - deadline, td, event
-    // mark task as done
-    // unmark task as done
-    // list tasks
     protected TaskList taskList;
 
     public TaskManager() {
@@ -15,21 +13,21 @@ public class TaskManager {
 
     public Task deleteUserTask(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
-            throw new IndexOutOfBoundsException("Task index out of bounds.");
+            throw new IndexOutOfBoundsException("Task.Task index out of bounds.");
         }
         return taskList.deleteTask(taskIndex);
     }
 
     public Task markTaskAsDone(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
-            throw new IndexOutOfBoundsException("Task index out of bounds.");
+            throw new IndexOutOfBoundsException("Task.Task index out of bounds.");
         }
         return taskList.getTask(taskIndex).markAsDone();
     }
 
     public Task unmarkTaskAsDone(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
-            throw new IndexOutOfBoundsException("Task index out of bounds.");
+            throw new IndexOutOfBoundsException("Task.Task index out of bounds.");
         }
         return taskList.getTask(taskIndex).unmarkAsDone();
     }

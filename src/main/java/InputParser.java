@@ -61,7 +61,7 @@ public class InputParser {
             try {
                 Integer.parseInt(invalidMarkMatcher.group(1));
             } catch (NumberFormatException e) {
-                throw new PennyException("Task number must be an integer. Usage: mark <task number>");
+                throw new PennyException("Task.Task number must be an integer. Usage: mark <task number>");
             }
         }
 
@@ -85,7 +85,7 @@ public class InputParser {
             try {
                 Integer.parseInt(invalidUnmarkMatcher.group(1));
             } catch (NumberFormatException e) {
-                throw new PennyException("Task number must be an integer. Usage: unmark <task number>");
+                throw new PennyException("Task.Task number must be an integer. Usage: unmark <task number>");
             }
         }
 
@@ -109,7 +109,7 @@ public class InputParser {
             try {
                 Integer.parseInt(deleteMatcher.group(1));
             } catch (NumberFormatException e) {
-                throw new PennyException("Task number must be an integer. Usage: delete <task number>");
+                throw new PennyException("Task.Task number must be an integer. Usage: delete <task number>");
             }
         }
 
