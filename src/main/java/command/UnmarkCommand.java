@@ -17,7 +17,7 @@ public class UnmarkCommand extends Command {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new IndexOutOfBoundsException("taskmodule.Task index out of bounds.");
         }
-        return taskList.getTask(taskIndex).markAsDone();
+        return taskList.getTask(taskIndex).unmarkAsDone();
     }
 
     @Override

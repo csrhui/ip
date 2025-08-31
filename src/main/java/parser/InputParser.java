@@ -72,8 +72,8 @@ public class InputParser {
 
     private Command prepareMark(String args) {
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new MarkCommand(targetIndex);
+            final int taskIndex = parseArgsAsDisplayedIndex(args) - 1;
+            return new MarkCommand(taskIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand("This is an invalid command format.\n"
                     + MarkCommand.MESSAGE_USAGE);
@@ -85,8 +85,8 @@ public class InputParser {
 
     private Command prepareUnmark(String args) {
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new UnmarkCommand(targetIndex);
+            final int taskIndex = parseArgsAsDisplayedIndex(args) - 1;
+            return new UnmarkCommand(taskIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand("This is an invalid command format.\n"
                     + UnmarkCommand.MESSAGE_USAGE);
@@ -98,8 +98,8 @@ public class InputParser {
 
     private Command prepareDelete(String args) {
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeleteCommand(targetIndex);
+            final int taskIndex = parseArgsAsDisplayedIndex(args) - 1;
+            return new DeleteCommand(taskIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand("This is an invalid command format.\n"
                     + DeleteCommand.MESSAGE_USAGE);

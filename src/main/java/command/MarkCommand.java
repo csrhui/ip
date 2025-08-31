@@ -22,6 +22,6 @@ public class MarkCommand extends Command {
 
     @Override
     public String respond() {
-        return "Nice! I've marked this task as done:\n  [X] " + this.markTaskAsDone(this.taskIndex);
+        return "Nice! I've marked this task as done:\n" + this.markTaskAsDone(this.taskIndex);
     }
 }

@@ -8,15 +8,15 @@ public class HelpCommand extends Command {
 
     @Override
     public String respond() {
-        return "Here are the available commands:\n"
-                + "\n" + ToDoCommand.MESSAGE_USAGE
-                + "\n" + DeadlineCommand.MESSAGE_USAGE
-                + "\n" + EventCommand.MESSAGE_USAGE
-                + "\n" + ListCommand.MESSAGE_USAGE
-                + "\n" + MarkCommand.MESSAGE_USAGE
-                + "\n" + UnmarkCommand.MESSAGE_USAGE
-                + "\n" + DeleteCommand.MESSAGE_USAGE
-                + "\n" + HelpCommand.MESSAGE_USAGE
-                + "\n" + ByeCommand.MESSAGE_USAGE;
+        return "Here are the available commands:\n\n"
+                + "\n\n" + ToDoCommand.MESSAGE_USAGE
+                + "\n\n" + DeadlineCommand.MESSAGE_USAGE
+                + "\n\n" + EventCommand.MESSAGE_USAGE
+                + "\n\n" + ListCommand.MESSAGE_USAGE
+                + "\n\n" + MarkCommand.MESSAGE_USAGE
+                + "\n\n" + UnmarkCommand.MESSAGE_USAGE
+                + "\n\n" + DeleteCommand.MESSAGE_USAGE
+                + "\n\n" + HelpCommand.MESSAGE_USAGE
+                + "\n\n" + ByeCommand.MESSAGE_USAGE;
     }
 }
