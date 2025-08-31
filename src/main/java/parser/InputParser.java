@@ -10,6 +10,7 @@ import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.EventCommand;
 import command.HelpCommand;
+import command.IncorrectCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.ToDoCommand;
@@ -19,7 +20,7 @@ import command.UnmarkCommand;
 public class InputParser {
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     public static final Pattern TODO_ARGS_FORMAT =
-            Pattern.compile("(?<description>.+)"); // everything after "rtodo" is description
+            Pattern.compile("(?<description>.+)");
     public static final Pattern DEADLINE_ARGS_FORMAT =
             Pattern.compile("(?<description>[^/]+) /by (?<time>.+)");
     public static final Pattern EVENT_ARGS_FORMAT =

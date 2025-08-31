@@ -1,8 +1,7 @@
-import taskmodule.Task;
-import taskmodule.TaskList;
+package taskmodule;
 
 public class TaskManager {
-    protected TaskList taskList;
+    public TaskList taskList;
 
     public TaskManager() {
         this.taskList = new TaskList();

@@ -1,8 +1,5 @@
 import parser.InputParser;
-import taskmodule.EventTask;
-import taskmodule.Task;
-import taskmodule.DeadlineTask;
-import taskmodule.ToDoTask;
+import taskmodule.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
