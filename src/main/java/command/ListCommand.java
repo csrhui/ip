@@ -4,7 +4,8 @@ import taskmodule.Task;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
-    public static final boolean shouldExit = false;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all tasks in the task list."
+            + "Example: " + COMMAND_WORD;
 
     public String listTasks() {
         int taskCount = taskList.getTaskCount();

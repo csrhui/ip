@@ -5,7 +5,10 @@ import taskmodule.Task;
 
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
-    public static final boolean shouldExit = false;
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a deadline task to the task list.\n"
+            + "Parameters: DESCRIPTION /by DATE_TIME\n"
+            + "Example: " + COMMAND_WORD + " return book /by 2024-09-15 18:00";
     private final String description;
     private final String by;
 

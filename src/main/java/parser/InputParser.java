@@ -9,6 +9,7 @@ import command.ByeCommand;
 import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.EventCommand;
+import command.HelpCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.ToDoCommand;
@@ -30,36 +31,41 @@ public class InputParser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            // todo: direct to IncorrectMessageCommand
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + HelpCommand.MESSAGE_USAGE);
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-            case ByeCommand.COMMAND_WORD:
-                return new ByeCommand();
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-            case MarkCommand.COMMAND_WORD:
-                return prepareMark(arguments);
+        case MarkCommand.COMMAND_WORD:
+            return prepareMark(arguments);
 
-            case UnmarkCommand.COMMAND_WORD:
-                return prepareUnmark(arguments);
+        case UnmarkCommand.COMMAND_WORD:
+            return prepareUnmark(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDelete(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(arguments);
 
-            case ToDoCommand.COMMAND_WORD:
-                return prepareToDo(arguments);
+        case ToDoCommand.COMMAND_WORD:
+            return prepareToDo(arguments);
 
-            case DeadlineCommand.COMMAND_WORD:
-                return prepareDeadline(arguments);
+        case DeadlineCommand.COMMAND_WORD:
+            return prepareDeadline(arguments);
 
-            case EventCommand.COMMAND_WORD:
-                return prepareEvent(arguments);
+        case EventCommand.COMMAND_WORD:
+            return prepareEvent(arguments);
+
+        case HelpCommand.COMMAND_WORD:
+        default:
+            return new HelpCommand();
         }
     }
 
@@ -68,9 +74,11 @@ public class InputParser {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new MarkCommand(targetIndex);
         } catch (ParseException pe) {
-            // todo: handle exception
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + MarkCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
-            // todo: handle exception
+            return new IncorrectCommand("The task index provided is invalid.\n"
+                    + MarkCommand.MESSAGE_USAGE);
         }
     }
 
@@ -79,9 +87,11 @@ public class InputParser {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new UnmarkCommand(targetIndex);
         } catch (ParseException pe) {
-            // todo: handle exception
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + UnmarkCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
-            // todo: handle exception
+            return new IncorrectCommand("The task index provided is invalid.\n"
+                    + UnmarkCommand.MESSAGE_USAGE);
         }
     }
 
@@ -90,16 +100,19 @@ public class InputParser {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
-            // todo: handle exception
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + DeleteCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
-            // todo: handle exception
+            return new IncorrectCommand("The task index provided is invalid.\n"
+                    + DeleteCommand.MESSAGE_USAGE);
         }
     }
 
     private Command prepareToDo(String args) {
         final Matcher matcher = TODO_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            // todo: direct to IncorrectMessageCommand
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + ToDoCommand.MESSAGE_USAGE);
         }
         return new ToDoCommand(matcher.group("description"));
     }
@@ -107,7 +120,8 @@ public class InputParser {
     private Command prepareDeadline(String args) {
         final Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            // todo: direct to IncorrectMessageCommand
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + DeadlineCommand.MESSAGE_USAGE);
         }
         return new DeadlineCommand(matcher.group("description"), matcher.group("time"));
     }
@@ -115,7 +129,8 @@ public class InputParser {
     private Command prepareEvent(String args) {
         final Matcher matcher = EVENT_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            // todo: direct to IncorrectMessageCommand
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + EventCommand.MESSAGE_USAGE);
         }
         return new EventCommand(matcher.group("description"), matcher.group("startTime"),
                 matcher.group("endTime"));
