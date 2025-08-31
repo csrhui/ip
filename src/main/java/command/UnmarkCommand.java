@@ -18,12 +18,8 @@ public class UnmarkCommand extends Command {
         return taskList.getTask(taskIndex).markAsDone();
     }
 
+    @Override
     public String respond() {
         return "OK, I've marked this task as not done yet:\n" + this.unmarkTaskAsDone();
-    }
-
-    @Override
-    public void execute() {
-        System.out.println(this.respond());
     }
 }

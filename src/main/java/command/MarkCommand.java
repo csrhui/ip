@@ -18,12 +18,8 @@ public class MarkCommand extends Command {
         return taskList.getTask(taskIndex).markAsDone();
     }
 
+    @Override
     public String respond() {
         return "Nice! I've marked this task as done:\n  [X] " + this.markTaskAsDone(this.taskIndex);
-    }
-
-    @Override
-    public void execute() {
-        System.out.println(this.respond());
     }
 }

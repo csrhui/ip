@@ -22,14 +22,10 @@ public class EventCommand extends Command {
         return eventTask;
     }
 
+    @Override
     public String respond() {
         return "Got it. I've added this task:\n"
                 + this.addUserTask() + "\n"
                 + taskList;
-    }
-
-    @Override
-    public void execute() {
-        System.out.println(this.respond());
     }
 }

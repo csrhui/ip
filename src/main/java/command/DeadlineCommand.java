@@ -20,14 +20,10 @@ public class DeadlineCommand extends Command {
         return deadlineTask;
     }
 
+    @Override
     public String respond() {
         return "Got it. I've added this task:\n"
                 + this.addUserTask() + "\n"
                 + taskList;
-    }
-
-    @Override
-    public void execute() {
-        System.out.println(this.respond());
     }
 }

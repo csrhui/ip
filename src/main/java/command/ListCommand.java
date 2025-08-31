@@ -23,7 +23,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        System.out.println(this.listTasks());
+    public String respond() {
+        return this.listTasks();
     }
 }

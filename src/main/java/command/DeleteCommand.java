@@ -18,14 +18,10 @@ public class DeleteCommand extends Command {
         return taskList.deleteTask(this.taskIndex);
     }
 
+    @Override
     public String respond() {
         return "Noted, I've removed this task:\n"
                 + this.deleteUserTask() + "\n"
                 + taskList;
-    }
-
-    @Override
-    public void execute() {
-        System.out.println(this.respond());
     }
 }
