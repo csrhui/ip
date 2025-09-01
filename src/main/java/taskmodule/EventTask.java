@@ -1,10 +1,12 @@
 package taskmodule;
 
-public class EventTask extends Task {
-    protected String from;
-    protected String to;
+import java.time.LocalDate;
 
-    public EventTask(String description, String from, String to) {
+public class EventTask extends Task {
+    protected LocalDate from;
+    protected LocalDate to;
+
+    public EventTask(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
         this.to = to;

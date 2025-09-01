@@ -1,8 +1,10 @@
 package parser;
 
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
 
 import command.Command;
 import command.ByeCommand;
@@ -124,7 +126,13 @@ public class InputParser {
             return new IncorrectCommand("This is an invalid command format.\n"
                     + DeadlineCommand.MESSAGE_USAGE);
         }
-        return new DeadlineCommand(matcher.group("description"), matcher.group("time"));
+        try {
+            LocalDate by = LocalDate.parse(matcher.group("time"));
+            return new DeadlineCommand(matcher.group("description"), by);
+        } catch (DateTimeParseException pe) {
+            return new IncorrectCommand("This is an invalid date format.\n"
+                    + "Input date as YYYY-MM-DD");
+        }
     }
 
     private Command prepareEvent(String args) {
@@ -133,8 +141,14 @@ public class InputParser {
             return new IncorrectCommand("This is an invalid command format.\n"
                     + EventCommand.MESSAGE_USAGE);
         }
-        return new EventCommand(matcher.group("description"), matcher.group("startTime"),
-                matcher.group("endTime"));
+        try {
+            LocalDate from = LocalDate.parse(matcher.group("startTime"));
+            LocalDate to = LocalDate.parse(matcher.group("endTime"));
+            return new EventCommand(matcher.group("description"), from, to);
+        } catch (DateTimeParseException pe) {
+            return new IncorrectCommand("This is an invalid date format.\n"
+                    + "Input date as YYYY-MM-DD");
+        }
     }
 
     private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
