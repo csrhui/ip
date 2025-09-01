@@ -1,5 +1,8 @@
+package ui;
+
 import command.Command;
 import parser.InputParser;
+import storage.Storage;
 
 import java.io.IOException;
 import java.util.Scanner;
