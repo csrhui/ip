@@ -3,6 +3,8 @@ package command;
 import taskmodule.DeadlineTask;
 import taskmodule.Task;
 
+import java.time.LocalDate;
+
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -10,9 +12,9 @@ public class DeadlineCommand extends Command {
             + "Parameters: DESCRIPTION /by DATE_TIME\n"
             + "Example: " + COMMAND_WORD + " return book /by 2024-09-15 18:00";
     private final String description;
-    private final String by;
+    private final LocalDate by;
 
-    public DeadlineCommand(String description, String by) {
+    public DeadlineCommand(String description, LocalDate by) {
         this.description = description;
         this.by = by;
     }
