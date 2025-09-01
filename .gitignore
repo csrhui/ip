@@ -1,5 +1,5 @@
 bot_output.txt
-task_storage.csv
+data/task_storage.csv
 
 # IDEA files
 /.idea/
