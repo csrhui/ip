@@ -19,7 +19,7 @@ public class TaskList {
 
     public Task getTask(int index) {
         if (index < 0 || index >= this.taskCount) {
-            throw new IndexOutOfBoundsException("Task.Task index out of bounds.");
+            throw new IndexOutOfBoundsException("taskmodule.Task index out of bounds.");
         }
         return this.taskStore.get(index);
     }
@@ -31,7 +31,7 @@ public class TaskList {
 
     public Task deleteTask(int index) {
         if (index < 0 || index >= this.taskCount) {
-            throw new IndexOutOfBoundsException("Task.Task index out of bounds.");
+            throw new IndexOutOfBoundsException("taskmodule.Task index out of bounds.");
         }
         this.taskCount--;
         return this.taskStore.remove(index);
