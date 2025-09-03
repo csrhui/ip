@@ -1,9 +1,9 @@
 package command;
 
+import java.time.LocalDate;
+
 import taskmodule.DeadlineTask;
 import taskmodule.Task;
-
-import java.time.LocalDate;
 
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";

@@ -1,9 +1,9 @@
 package command;
 
+import java.time.LocalDate;
+
 import taskmodule.EventTask;
 import taskmodule.Task;
-
-import java.time.LocalDate;
 
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
@@ -11,8 +11,8 @@ public class EventCommand extends Command {
             + "Parameters: DESCRIPTION /from START_TIME /to END_TIME\n"
             + "Example: " + COMMAND_WORD + " project meeting /from 2pm /to 4pm";
     private final String description;
-    private LocalDate from;
-    private LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     public EventCommand(String description, LocalDate from, LocalDate to) {
         this.description = description;

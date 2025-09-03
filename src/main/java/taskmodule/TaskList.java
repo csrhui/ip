@@ -1,11 +1,11 @@
 package taskmodule;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TaskList {
-    private List<Task> taskStore;
+    private final List<Task> taskStore;
     private int taskCount;
 
     public TaskList() {
