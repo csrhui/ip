@@ -7,7 +7,7 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task in the task list.\n"
             + "Parameters: TASK_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    private final int taskIndex;
+    public final int taskIndex;
 
     public MarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;

@@ -31,7 +31,7 @@ public class InputParser {
     public static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    public Command parseCommand(String userInput) {
+    public static Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("This is an invalid command format.\n"
@@ -72,7 +72,7 @@ public class InputParser {
         }
     }
 
-    private Command prepareMark(String args) {
+    private static Command prepareMark(String args) {
         try {
             final int taskIndex = parseArgsAsDisplayedIndex(args) - 1;
             return new MarkCommand(taskIndex);
@@ -85,7 +85,7 @@ public class InputParser {
         }
     }
 
-    private Command prepareUnmark(String args) {
+    private static Command prepareUnmark(String args) {
         try {
             final int taskIndex = parseArgsAsDisplayedIndex(args) - 1;
             return new UnmarkCommand(taskIndex);
@@ -98,7 +98,7 @@ public class InputParser {
         }
     }
 
-    private Command prepareDelete(String args) {
+    private static Command prepareDelete(String args) {
         try {
             final int taskIndex = parseArgsAsDisplayedIndex(args) - 1;
             return new DeleteCommand(taskIndex);
@@ -111,7 +111,7 @@ public class InputParser {
         }
     }
 
-    private Command prepareToDo(String args) {
+    private static Command prepareToDo(String args) {
         final Matcher matcher = TODO_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("This is an invalid command format.\n"
@@ -120,7 +120,7 @@ public class InputParser {
         return new ToDoCommand(matcher.group("description"));
     }
 
-    private Command prepareDeadline(String args) {
+    private static Command prepareDeadline(String args) {
         final Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("This is an invalid command format.\n"
@@ -135,7 +135,7 @@ public class InputParser {
         }
     }
 
-    private Command prepareEvent(String args) {
+    private static Command prepareEvent(String args) {
         final Matcher matcher = EVENT_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("This is an invalid command format.\n"
@@ -151,7 +151,7 @@ public class InputParser {
         }
     }
 
-    private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
+    private static int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new ParseException("Could not find index number to parse.", 0);
