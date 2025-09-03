@@ -2,6 +2,15 @@ package command;
 
 import taskmodule.Task;
 
+
+/**
+ * Represents the {@code delete} command which removes a task
+ * from the task list.
+ *
+ * <p>When executed, this command deletes the task at the specified
+ * index from the global {@link Command#taskList} and returns a
+ * confirmation message to the user.</p>
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -10,10 +19,21 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
     private final int taskIndex;
 
+    /**
+     * Constructs a {@code DeleteCommand} with the given task index.
+     *
+     * @param taskIndex the zero-based index of the task to be deleted
+     */
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Deletes the task at the specified index from the global {@link Command#taskList}.
+     *
+     * @return the deleted {@link Task}
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
     public Task deleteUserTask() {
         if (this.taskIndex < 0 || this.taskIndex >= taskList.getTaskCount()) {
             throw new IndexOutOfBoundsException("taskmodule.Task index out of bounds.");
@@ -21,6 +41,12 @@ public class DeleteCommand extends Command {
         return taskList.deleteTask(this.taskIndex);
     }
 
+    /**
+     * Executes this command by deleting the specified task,
+     * and returns Penny's confirmation message.
+     *
+     * @return the confirmation message to be displayed to the user
+     */
     @Override
     public String respond() {
         return "Noted, I've removed this task:\n"
