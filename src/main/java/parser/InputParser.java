@@ -1,16 +1,17 @@
 package parser;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.time.LocalDate;
 
-import command.Command;
 import command.ByeCommand;
+import command.Command;
 import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.EventCommand;
+import command.FindCommand;
 import command.HelpCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
@@ -21,6 +22,7 @@ import command.UnmarkCommand;
 
 public class InputParser {
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    public static final Pattern FIND_ARGS_FORMAT = Pattern.compile("(?<keyword>.+)");
     public static final Pattern TODO_ARGS_FORMAT =
             Pattern.compile("(?<description>.+)");
     public static final Pattern DEADLINE_ARGS_FORMAT =
@@ -57,6 +59,9 @@ public class InputParser {
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
 
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(arguments);
+
         case ToDoCommand.COMMAND_WORD:
             return prepareToDo(arguments);
 
@@ -67,6 +72,7 @@ public class InputParser {
             return prepareEvent(arguments);
 
         case HelpCommand.COMMAND_WORD:
+
         default:
             return new HelpCommand();
         }
@@ -109,6 +115,15 @@ public class InputParser {
             return new IncorrectCommand("The task index provided is invalid.\n"
                     + DeleteCommand.MESSAGE_USAGE);
         }
+    }
+
+    private static Command prepareFind(String args) {
+        final Matcher matcher = FIND_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + FindCommand.MESSAGE_USAGE);
+        }
+        return new FindCommand(matcher.group("keyword"));
     }
 
     private static Command prepareToDo(String args) {
