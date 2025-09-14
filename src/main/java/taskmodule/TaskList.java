@@ -18,6 +18,8 @@ public class TaskList {
     }
 
     public Task getTask(int index) {
+        assert index >= 0 && index < this.taskCount : "Task index should be within valid range.";
+
         if (index < 0 || index >= this.taskCount) {
             throw new IndexOutOfBoundsException("taskmodule.Task index out of bounds.");
         }
@@ -30,6 +32,8 @@ public class TaskList {
     }
 
     public Task deleteTask(int index) {
+        assert index >= 0 && index < this.taskCount : "Task index should be within valid range.";
+
         if (index < 0 || index >= this.taskCount) {
             throw new IndexOutOfBoundsException("taskmodule.Task index out of bounds.");
         }

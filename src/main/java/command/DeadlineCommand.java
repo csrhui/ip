@@ -30,6 +30,10 @@ public class DeadlineCommand extends Command {
      * @param by          the due date of the deadline task
      */
     public DeadlineCommand(String description, LocalDate by) {
+        assert description != null : "Description should not be null";
+        assert by != null : "Event start time should not be null";
+
+        assert by != null : "Deadline date should not be null";
         this.description = description;
         this.by = by;
     }

@@ -23,6 +23,8 @@ public class UnmarkCommand extends Command {
      * @param taskIndex the zero-based index of the task to unmark as done
      */
     public UnmarkCommand(int taskIndex) {
+        assert taskIndex >= 0 : "Task index should be non-negative";
+
         this.taskIndex = taskIndex;
     }
 
