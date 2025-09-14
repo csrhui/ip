@@ -11,6 +11,8 @@ public class FindCommand extends Command {
     public final String keyword;
 
     public FindCommand(String keyword) {
+        assert keyword != null : "Keyword should not be null";
+
         this.keyword = keyword;
     }
 

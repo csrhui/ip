@@ -32,6 +32,10 @@ public class EventCommand extends Command {
      * @param to          the end time of the event
      */
     public EventCommand(String description, LocalDate from, LocalDate to) {
+        assert description != null : "Description should not be null";
+        assert from != null : "Event start time should not be null";
+        assert to != null : "Event end time should not be null";
+
         this.description = description;
         this.from = from;
         this.to = to;
