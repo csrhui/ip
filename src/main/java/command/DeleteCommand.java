@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
             + ": Deletes the task identified by the index number used in the displayed task list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
+
     private final int taskIndex;
 
     /**
