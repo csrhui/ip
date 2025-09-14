@@ -16,6 +16,7 @@ import command.HelpCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
 import command.MarkCommand;
+import command.NoteCommand;
 import command.ToDoCommand;
 import command.UnmarkCommand;
 
@@ -23,6 +24,8 @@ import command.UnmarkCommand;
 public class InputParser {
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     public static final Pattern FIND_ARGS_FORMAT = Pattern.compile("(?<keyword>.+)");
+    public static final Pattern NOTE_ARGS_FORMAT =
+            Pattern.compile("(?<targetIndex>\\d+) /content (?<noteContent>.+)");
     public static final Pattern TODO_ARGS_FORMAT =
             Pattern.compile("(?<description>.+)");
     public static final Pattern DEADLINE_ARGS_FORMAT =
@@ -61,6 +64,9 @@ public class InputParser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+
+        case NoteCommand.COMMAND_WORD:
+            return prepareNote(arguments);
 
         case ToDoCommand.COMMAND_WORD:
             return prepareToDo(arguments);
@@ -124,6 +130,22 @@ public class InputParser {
                     + FindCommand.MESSAGE_USAGE);
         }
         return new FindCommand(matcher.group("keyword"));
+    }
+
+    private static Command prepareNote(String args) {
+        final Matcher matcher = NOTE_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand("This is an invalid command format.\n"
+                    + NoteCommand.MESSAGE_USAGE);
+        }
+        try {
+            final int taskIndex = Integer.parseInt(matcher.group("targetIndex")) - 1;
+            final String noteContent = matcher.group("noteContent");
+            return new NoteCommand(taskIndex, noteContent);
+        } catch (NumberFormatException nfe) {
+            return new IncorrectCommand("The task index provided is invalid.\n"
+                    + NoteCommand.MESSAGE_USAGE);
+        }
     }
 
     private static Command prepareToDo(String args) {
