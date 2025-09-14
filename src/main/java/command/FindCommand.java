@@ -8,6 +8,7 @@ public class FindCommand extends Command {
             + ": Searches for tasks that contain the keyword in their descriptions.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " book";
+
     public final String keyword;
 
     public FindCommand(String keyword) {
