@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
         userInput.setPromptText("Type your message here...");
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Penny instance */
     public void setPenny(Penny p) {
         penny = p;
     }
