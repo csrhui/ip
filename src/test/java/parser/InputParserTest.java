@@ -1,14 +1,19 @@
 package parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
+import org.junit.jupiter.api.Test;
+
 import command.ByeCommand;
 import command.Command;
 import command.IncorrectCommand;
 import command.MarkCommand;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import ui.Penny;
 
 public class InputParserTest {
+    ui.Penny penny = new Penny();
+
     @Test
     public void parseCommand_bye_success() {
         assertInstanceOf(ByeCommand.class, InputParser.parseCommand("bye"));
