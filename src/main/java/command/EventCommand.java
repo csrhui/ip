@@ -17,8 +17,8 @@ import taskmodule.Task;
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event task to the task list.\n"
-            + "Parameters: DESCRIPTION /from START_TIME /to END_TIME\n"
-            + "Example: " + COMMAND_WORD + " project meeting /from 2pm /to 4pm";
+            + "Parameters: DESCRIPTION /from START_DATE /to END_DATE\n"
+            + "Example: " + COMMAND_WORD + " orientation camp /from 2025-07-20 /to 2025-07-24";
 
     private final String description;
     private final LocalDate from;
