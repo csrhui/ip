@@ -13,6 +13,11 @@ public class TaskList {
         this.taskCount = 0;
     }
 
+    public TaskList(List<Task> taskStore) {
+        this.taskStore = taskStore;
+        this.taskCount = taskStore.size();
+    }
+
     public int getTaskCount() {
         return this.taskCount;
     }

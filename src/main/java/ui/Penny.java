@@ -9,10 +9,15 @@ import storage.Storage;
 
 
 public class Penny {
+    public static Storage storage;
+
+    public Penny() {
+        this.storage = new Storage();
+    }
+
     public String getResponse(String userInput) {
         do {
             Command command = InputParser.parseCommand(userInput);
-            Storage storage = new Storage(Command.taskList);
             try {
                 storage.saveTasks();
             } catch (IOException e) {

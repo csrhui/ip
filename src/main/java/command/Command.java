@@ -1,6 +1,7 @@
 package command;
 
 import taskmodule.TaskList;
+import ui.Penny;
 
 /**
  * Represents an abstract user command in the Penny application.
@@ -15,7 +16,7 @@ import taskmodule.TaskList;
  * return an appropriate message.</p>
  */
 public abstract class Command {
-    public static final TaskList taskList = new TaskList();
+    public static final TaskList taskList = Penny.storage.getTaskList();
     public static boolean shouldExit = false;
 
     /**
