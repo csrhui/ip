@@ -16,15 +16,34 @@ import taskmodule.Task;
 import taskmodule.TaskList;
 import taskmodule.ToDoTask;
 
-
+/**
+ * Handles the saving and loading of tasks from persistent storage.
+ *
+ * <p>The {@code Storage} class is responsible for reading tasks from a CSV file
+ * at startup and writing tasks back to the file whenever changes are made.
+ * Tasks are stored in the global {@link TaskList} and serialized/deserialized
+ * using {@link Task#toDataString()}.</p>
+ */
 public class Storage {
     protected TaskList tasklist;
     protected String filePath = "data/task_storage.csv";
 
+    /**
+     * Constructs a {@code Storage} object and initializes the task list
+     * by loading tasks from the storage file.
+     */
     public Storage() {
         this.tasklist = setTaskList();
     }
 
+    /**
+     * Saves all tasks in the current task list to the storage file.
+     *
+     * <p>If the file or its parent directory does not exist, they are created.
+     * Each task is written in its serialized form, one per line.</p>
+     *
+     * @throws IOException if an error occurs while creating or writing to the file
+     */
     public void saveTasks() throws IOException {
         File file = new File(this.filePath);
         File parentDir = file.getParentFile();
@@ -49,6 +68,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the storage file and constructs a {@link TaskList}.
+     *
+     * <p>The CSV format uses {@code |}-separated values with the following columns:</p>
+     * <ul>
+     *   <li>Type ({@code T}, {@code D}, {@code E})</li>
+     *   <li>Completion status (0 or 1)</li>
+     *   <li>Description</li>
+     *   <li>Optional note</li>
+     *   <li>Deadlines and event dates (when applicable)</li>
+     * </ul>
+     *
+     * @return a populated {@link TaskList} if tasks are found, otherwise an empty one
+     */
     public TaskList setTaskList() {
         List<Task> taskStore = new ArrayList<Task>();
 
@@ -110,6 +143,11 @@ public class Storage {
         return new TaskList();
     }
 
+    /**
+     * Returns the current task list.
+     *
+     * @return the {@link TaskList} managed by this storage instance
+     */
     public TaskList getTaskList() {
         return this.tasklist;
     }
