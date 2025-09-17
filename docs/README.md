@@ -7,6 +7,20 @@ Penny is a simple, lightweight task management chatbot written in Java.
 You interact with Penny using text-based commands to manage your tasks.
 Tasks are automatically saved in `data/task_storage.csv` and reloaded the next time you run Penny.
 
+## Quick Start
+___
+1. **Launch Penny**
+- Run the `Penny.jar` file to start the application.
+- A window will open with a text input field at the bottom.
+
+2. **Enter Commands**
+- Type your commands in the input field and press Enter or the 'send' button to execute them.
+- Penny will respond with the appropriate output in the main window.
+
+___
+# Features
+___
+
 ## Adding Todos
 ___
 
