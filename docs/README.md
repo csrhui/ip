@@ -163,3 +163,23 @@ The expected output is:
 ```
 Bye. Hope to see you again soon!
 ```
+
+## Getting Help
+___
+The Command should be written in the format: `help`
+
+Example: `help`
+
+The expected output is:
+
+```
+Here are the available commands: 
+
+
+todo: Adds a todo task to the task list.
+Parameters: DESCRIPTION
+Example: todo read book
+
+...
+```
+(See `help` command in Penny for full list of commands)
