@@ -78,6 +78,7 @@ public class InputParser {
             return prepareEvent(arguments);
 
         case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             return new HelpCommand();
