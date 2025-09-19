@@ -13,7 +13,7 @@ import taskmodule.Task;
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task in the task list.\n"
-            + "Parameters: TASK_INDEX (must be a positive integer)\n"
+            + "Parameters: TASK_INDEX (must be a positive integer less than or equal to the number of tasks)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public final int taskIndex;
@@ -51,6 +51,12 @@ public class MarkCommand extends Command {
      */
     @Override
     public String respond() {
-        return "Nice! I've marked this task as done:\n" + this.markTaskAsDone(this.taskIndex);
+        try {
+            return "Nice! I've marked this task as done:\n" + this.markTaskAsDone(this.taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    "The task index provided is invalid.\n" + MarkCommand.MESSAGE_USAGE);
+            return incorrectCommand.respond();
+        }
     }
 }

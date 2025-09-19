@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the displayed task list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: TASK_INDEX (must be a positive integer less than or equal to the number of tasks)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     private final int taskIndex;
@@ -52,8 +52,14 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String respond() {
-        return "Noted, I've removed this task:\n"
-                + this.deleteUserTask() + "\n"
-                + taskList;
+        try {
+            return "Noted, I've removed this task:\n"
+                    + this.deleteUserTask() + "\n"
+                    + taskList;
+        } catch (IndexOutOfBoundsException e) {
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    "The task index provided is invalid.\n" + DeleteCommand.MESSAGE_USAGE);
+            return incorrectCommand.respond();
+        }
     }
 }

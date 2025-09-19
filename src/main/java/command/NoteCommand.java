@@ -13,7 +13,8 @@ public class NoteCommand extends Command {
     public static final String COMMAND_WORD = "note";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a note to the specified task.\n"
-            + "Parameters: TASK_NUMBER /content NOTE_CONTENT\n"
+            + "Parameters: TASK_INDEX /content NOTE_CONTENT\n"
+            + "(TASK_INDEX must be a positive integer less than or equal to the number of tasks)\n"
             + "Example: " + COMMAND_WORD + " 2 /content This is an important task.";
 
     private final int taskIndex;
@@ -55,6 +56,12 @@ public class NoteCommand extends Command {
      */
     @Override
     public String respond() {
-        return "Got it! I've added your note to the task:\n" + this.addNoteToTask();
+        try {
+            return "Got it! I've added your note to the task:\n" + this.addNoteToTask();
+        } catch (IndexOutOfBoundsException e) {
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    "The task index provided is invalid.\n" + NoteCommand.MESSAGE_USAGE);
+            return incorrectCommand.respond();
+        }
     }
 }

@@ -13,7 +13,7 @@ import taskmodule.Task;
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as not done yet.\n"
-            + "Parameters: TASK_INDEX (must be a positive integer)\n"
+            + "Parameters: TASK_INDEX (must be a positive integer less than or equal to the number of tasks)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public final int taskIndex;
@@ -50,6 +50,12 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String respond() {
-        return "OK, I've marked this task as not done yet:\n" + this.unmarkTaskAsDone();
+        try {
+            return "OK, I've marked this task as not done yet:\n" + this.unmarkTaskAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    "The task index provided is invalid.\n" + UnmarkCommand.MESSAGE_USAGE);
+            return incorrectCommand.respond();
+        }
     }
 }
